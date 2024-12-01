@@ -19,8 +19,6 @@ class Dbus < Formula
   depends_on "ninja" => :build
   depends_on "pkgconf" => :build
 
-  depends_on "docbook" => :build
-  depends_on "docbook-xsl" => :build
   depends_on "xmlto" => :build
 
   uses_from_macos "expat"
