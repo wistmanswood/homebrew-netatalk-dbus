@@ -64,7 +64,7 @@ class Dbus < Formula
   end
 
   def post_install
-    system "install_name_tool", "-add_rpath #{lib}", bin/"dbus-daemon"
+    system "install_name_tool", "-add_rpath", "#{lib}", bin/"dbus-daemon"
     # Generate D-Bus's UUID for this machine
     system bin/"dbus-uuidgen", "--ensure=#{var}/lib/dbus/machine-id"
   end
