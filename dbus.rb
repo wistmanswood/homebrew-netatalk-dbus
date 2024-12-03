@@ -45,14 +45,11 @@ class Dbus < Formula
       -Dxml_docs=enabled
       -Dx11_autolaunch=disabled
       -Dmodular_tests=disabled
-      -Dsystem_pid_file=/var/run/dbus.pid
     ]
 
     system "meson", "setup", "build", *args, *std_meson_args, "--localstatedir=#{var}", "--sysconfdir=#{etc}"
     system "meson", "compile", "-C", "build", "--verbose"
     system "meson", "install", "-C", "build"
-    # system "rm", "-f", "#{etc}/dbus-1/session.conf"
-    # system "rm", "-f", "#{etc}/dbus-1/system.conf"
     system "mkdir", "-p", "#{etc}/dbus-1/system.d"
   end
 
@@ -64,6 +61,7 @@ class Dbus < Formula
   end
 
   def post_install
+    # Fix 'no LC_RPATH's found' error
     system "install_name_tool", "-add_rpath", "#{lib}", bin/"dbus-daemon"
     # Generate D-Bus's UUID for this machine
     system bin/"dbus-uuidgen", "--ensure=#{var}/lib/dbus/machine-id"
