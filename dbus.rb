@@ -42,8 +42,7 @@ class Dbus < Formula
     system "./autogen.sh"
     system "./configure", *args
     system "make", "install"
-    system "rm", "-f", "#{etc}/dbus-1/session.conf"
-    system "rm", "-f", "#{etc}/dbus-1/system.conf"
+    system "mkdir", "-p", "#{etc}/dbus-1/session.d"
     system "mkdir", "-p", "#{etc}/dbus-1/system.d"
   end
 
